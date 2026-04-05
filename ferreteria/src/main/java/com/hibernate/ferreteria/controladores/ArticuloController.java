@@ -4,6 +4,7 @@ import com.hibernate.ferreteria.dto.ArticulosDTO;
 import com.hibernate.ferreteria.entity.Articulos;
 import com.hibernate.ferreteria.mapper.ArticuloMapper;
 import com.hibernate.ferreteria.repositorios.Repo_articulos;
+import com.hibernate.ferreteria.servicios.ArticulosServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +17,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/articulos")
 public class ArticuloController {
     @Autowired
-    private Repo_articulos repositorio;
+    private ArticulosServices servicio;
 
     @GetMapping
-    public List<ArticulosDTO> Consulta() {
-        return repositorio.findAll().stream().map(ArticuloMapper::toDTO)
-                .collect(Collectors.toList());
-
+    public List<ArticulosDTO> listar() {
+        return servicio.Consulta();
     }
 }
