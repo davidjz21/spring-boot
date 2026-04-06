@@ -6,9 +6,7 @@ import com.hibernate.ferreteria.mapper.ArticuloMapper;
 import com.hibernate.ferreteria.repositorios.Repo_articulos;
 import com.hibernate.ferreteria.servicios.ArticulosServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +19,11 @@ public class ArticuloController {
 
     @GetMapping
     public List<ArticulosDTO> listar() {
-        return servicio.Consulta();
+        return servicio.serv_consulta();
+    }
+
+    @PostMapping
+    public ArticulosDTO insertaArticulo(@RequestBody ArticulosDTO dto) {
+        return servicio.serv_inserta(dto);
     }
 }
