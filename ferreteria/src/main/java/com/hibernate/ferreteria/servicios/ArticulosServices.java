@@ -46,4 +46,13 @@ public class ArticulosServices {
             throw new RuntimeException("articulo no encontrado con id: " + id);
         }
     }
+
+    public String eliminaArticulos(Long id) {
+        if (repo.existsById(id)) {
+            repo.deleteById(id);
+            return "articulo eliminado";
+        } else {
+            return "articulo: " + id + " no encontrado";
+        }
+    }
 }

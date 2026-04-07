@@ -31,4 +31,9 @@ public class ArticuloController {
     public ArticulosDTO actualizaArticulo(@PathVariable Long id, @RequestBody ArticulosDTO dto) {
         return servicio.serv_actualiza(id, dto);
     }
+
+    @DeleteMapping("/{id}")
+    public String borrarArticulos(@PathVariable Long id) {
+        return servicio.eliminaArticulos(id);
+    }
 }
