@@ -26,4 +26,9 @@ public class ArticuloController {
     public ArticulosDTO insertaArticulo(@RequestBody ArticulosDTO dto) {
         return servicio.serv_inserta(dto);
     }
+
+    @PutMapping("/{id}")
+    public ArticulosDTO actualizaArticulo(@PathVariable Long id, @RequestBody ArticulosDTO dto) {
+        return servicio.serv_actualiza(id, dto);
+    }
 }

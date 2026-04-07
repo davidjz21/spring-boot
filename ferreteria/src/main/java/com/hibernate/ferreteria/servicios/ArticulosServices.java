@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,5 +26,24 @@ public class ArticulosServices {
         Articulos articulo = ArticuloMapper.toEntity(dto);
         Articulos insertado = repo.save(articulo);
         return ArticuloMapper.toDTO(insertado);
+    }
+
+    public ArticulosDTO serv_actualiza (long id, ArticulosDTO dto) {
+        Optional<Articulos> existe = repo.findById(id);
+
+        if (existe.isPresent()) {
+            Articulos articulo = existe.get();
+
+            articulo.setNombreArticulo(dto.getNombreArticulo());
+            articulo.setPrecio(dto.getPrecio());
+            articulo.setExistencia(dto.getExistencia());
+
+            Articulos actualizado = repo.save(articulo);
+
+            return ArticuloMapper.toDTO(actualizado);
+
+        } else {
+            throw new RuntimeException("articulo no encontrado con id: " + id);
+        }
     }
 }
